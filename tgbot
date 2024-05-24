@@ -1,0 +1,24 @@
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
+
+def start(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Привет! Это ваш новый телеграмм-бот.')
+
+def game(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Здесь будет ваша мини-игра.')
+
+def main() -> None:
+    updater = Updater("TOKEN", use_context=True)
+
+    dispatcher = updater.dispatcher
+
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("game", game))
+
+    updater.start_polling()
+
+    updater.idle()
+
+
+if __name__ == '__main__':
+    main()
